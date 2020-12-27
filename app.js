@@ -21,7 +21,7 @@ mongoose.connect(db.dbURI, { useNewUrlParser: true, useUnifiedTopology: true , u
 .catch(err => console.log(err));
 
 const store = new MongoDBStore({
-  uri: "mongodb:localhost/vidjot-dev",
+  uri: "mongodb://localhost/vidjot-dev",
   databaseName: "vidjot-dev",
   collection: 'users'
 });
