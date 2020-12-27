@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-primary mb-3">
+  <div class="container">
+    <a class="navbar-brand" href="/">VidJot</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link" href="/">Home</a>
+        <a class="nav-link" href="/About">About</a>
+      </div>
+      <div class="navbar-nav ml-auto">
+        <% if (user) { %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Video Ideas
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="/ideas">Idea</a>
+            <a class="dropdown-item" href="/ideas/add">Add Idea</a>
+          </div>
+        </li>
+        <a class="nav-link" href="/users/logout">Logout</a>
+          <% } else { %>
+            <a class="nav-link" href="/users/login">Login</a>
+            <a class="nav-link" href="/users/register">Register</a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>
