@@ -2,7 +2,7 @@ const express = require("express");
 const methodOverride = require('method-override')
 const flash = require("connect-flash");
 const session = require("express-session");
-const MemoryStore = require('memorystore')(session);
+const MongoDBStore = require('connect-mongodb-session')(session);
 const mongoose = require("mongoose");
 const ideaRoutes = require("./routes/ideaRoutes");
 const userRoutes = require("./routes/userRoutes");
@@ -10,6 +10,16 @@ const passport = require("passport");
 const db = require("./config/database");
 
 const app = express();
+
+const store = new MongoDBStore({
+  uri: db.dbURI,
+  databaseName: "vidjot-dev",
+  collection: 'users'
+});
+
+store.on('error', (error) => {
+  console.log(error);
+});
 
 mongoose.connect(db.dbURI, { useNewUrlParser: true, useUnifiedTopology: true , useCreateIndex: true})
 .then((result) => {
@@ -25,10 +35,7 @@ app.use(express.urlencoded({ extended: true }));
 app.set( "view engine", "ejs");
 app.use(methodOverride('_method'));
 app.use(session({
-  cookie: { maxAge: 86400000 },
-  store: new MemoryStore({
-      checkPeriod: 86400000 // prune expired entries every 24h
-    }),
+  store: store,
   secret: 'secret',
   resave: true,
   saveUninitialized: true
