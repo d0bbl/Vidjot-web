@@ -2,7 +2,7 @@ const express = require("express");
 const methodOverride = require('method-override')
 const flash = require("connect-flash");
 const session = require("express-session");
-const MongoDBStore = require('connect-mongodb-session')(session);
+const MongoStore = require('connect-mongo')(session);
 const mongoose = require("mongoose");
 const ideaRoutes = require("./routes/ideaRoutes");
 const userRoutes = require("./routes/userRoutes");
@@ -22,22 +22,22 @@ mongoose.connect(db.dbURI, { useNewUrlParser: true, useUnifiedTopology: true , u
 })
 .catch(err => console.log(err));
 
-const store = new MongoDBStore({
-  uri: db.dbURI,
-  databaseName: "vidjot-dev",
-  collection: 'users'
-});
+// const store = new MongoDBStore({
+//   uri: db.dbURI,
+//   databaseName: "vidjot-dev",
+//   collection: 'users'
+// });
 
-store.on('error', (error) => {
-  console.log(error);
-});
+// store.on('error', (error) => {
+//   console.log(error);
+// });
 
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.set( "view engine", "ejs");
 app.use(methodOverride('_method'));
 app.use(session({
-  store: store,
+  store: new MongoStore({ mongooseConnection: mongoose.connection }),
   secret: 'secret',
   resave: true,
   saveUninitialized: true
