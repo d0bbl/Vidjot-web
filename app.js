@@ -22,7 +22,7 @@ mongoose.connect(db.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true 
 .catch(err => console.log(err));
 
 // const store = new MongoDBStore({
-//   uri: db.dbURI,
+//   uri: db.mongoURI,
 //   databaseName: "vidjot-dev",
 //   collection: 'users'
 // });
