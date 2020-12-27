@@ -11,7 +11,7 @@ const db = require("./config/database");
 
 const app = express();
 
-mongoose.connect(db.dbURI, { useNewUrlParser: true, useUnifiedTopology: true , useCreateIndex: true})
+mongoose.connect(db.dbURI, { useNewUrlParser: true, useUnifiedTopology: true , useCreateIndex: true, useMongoClient: true })
 .then((result) => {
   const port = process.env.PORT || 5000;
   app.listen(port, () => {
@@ -21,7 +21,7 @@ mongoose.connect(db.dbURI, { useNewUrlParser: true, useUnifiedTopology: true , u
 .catch(err => console.log(err));
 
 const store = new MongoDBStore({
-  uri: "mongodb://localhost/vidjot-dev",
+  uri: db.dbURI,
   databaseName: "vidjot-dev",
   collection: 'users'
 });
