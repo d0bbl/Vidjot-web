@@ -12,11 +12,11 @@
     <div class="row">
     <div class="col-sm-6 mx-auto">
     <div class="card card-body">
-      <%- include ("../partials/_msg.ejs") %>
-    <%  if(error.length > 0) { %>        <div class="alert alert-danger">
+      <%- include ("../partials/_errors.ejs") %>
+    <!-- <%  if(error.length > 0) { %>        <div class="alert alert-danger">
          <%= error.text %>
        </div>
-      <% } %>
+      <% } %> -->
       <h3 class="text-center">Account Login</h3>
         <form class="" action="/users/login" method="post">
           <div class="form-group">

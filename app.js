@@ -11,7 +11,6 @@ const db = require("./config/database");
 
 const app = express();
 
-console.log(db.mongoURI);
 mongoose.connect(db.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true , useCreateIndex: true})
 .then((result) => {
   const port = process.env.PORT || 5000;

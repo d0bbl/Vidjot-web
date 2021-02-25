@@ -6,8 +6,8 @@ const passport = require("passport");
 const router = express.Router();
 
 router.get( "/login", (req, res) => {
-  let error = [];
-res.render("users/login");
+  let errors = [];
+res.render("users/login", {errors});
 });
 
 router.get("/register", (req, res) => {
@@ -64,7 +64,7 @@ if(errors.length > 0){
               user.password = hash;
               user.save()
                 .then(user => {
-                  req.flash("success_msg", "Registration successful. You can now login.");
+                  req.flash("success_msg", "Registration successful.");
                   res.redirect("/users/login");
                 })
                 .catch(err => {throw err;
